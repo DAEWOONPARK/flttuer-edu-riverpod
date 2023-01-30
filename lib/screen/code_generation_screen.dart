@@ -10,14 +10,38 @@ class CodeGenerationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 주의! code_generation_provider.g.dart에 있는 Provider를 써야함
     final state1 = ref.watch(gStateProvider);
+    final state2 = ref.watch(gStateFutureProvider);
+    final state3 = ref.watch(gStateFuture2Provider);
 
     return DefaultLayout(
       title: 'CodeGenerationScreen',
       body: Column(
         children: [
-          Text(
-            'State1: $state1',
+          Text('State1: $state1'),
+          state2.when(
+            data: (data) {
+              return Text(
+                'State2: $data',
+                textAlign: TextAlign.center,
+              );
+            },
+            error: (err, stack) => Text(
+              err.toString(),
+            ),
+            loading: () => Center(child: CircularProgressIndicator()),
           ),
+          state3.when(
+            data: (data) {
+              return Text(
+                'State3: $data',
+                textAlign: TextAlign.center,
+              );
+            },
+            error: (err, stack) => Text(
+              err.toString(),
+            ),
+            loading: () => Center(child: CircularProgressIndicator()),
+          )
         ],
       ),
     );
