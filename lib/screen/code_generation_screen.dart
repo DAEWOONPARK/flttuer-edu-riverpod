@@ -59,6 +59,16 @@ class CodeGenerationScreen extends ConsumerWidget {
                   },
                   child: Text('Decrement')),
             ],
+          ),
+          // Invalidate()
+          // 유효하지 않게 하다
+          ElevatedButton(
+            onPressed: () {
+              ref.invalidate(gStateNotifierProvider);
+            },
+            child: Text(
+              'Invalidate',
+            ),
           )
         ],
       ),
